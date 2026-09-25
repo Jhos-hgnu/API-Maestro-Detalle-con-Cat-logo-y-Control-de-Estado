@@ -6,3 +6,414 @@ datasource db {
   provider = "sqlserver"
   url      = env("DATABASE_URL")
 }
+
+model CitasLocales {
+  CitaID     Int       @id(map: "PK__CitasLoc__F0E2D9F29AB701E3")
+  PacienteID Int?
+  MedicoID   Int?
+  FechaCita  DateTime? @db.Date
+}
+
+model CitasLocales7587 {
+  CitaID     Int       @id(map: "PK__CitasLoc__F0E2D9F24CDC87E7")
+  PacienteID Int?
+  MedicoID   Int?
+  FechaCita  DateTime? @db.Date
+}
+
+model ClientesLocal {
+  ClienteID     Int     @id(map: "PK__Clientes__71ABD0A79B5B1EDF")
+  NombreCliente String? @db.VarChar(100)
+  CiudadCliente String? @db.VarChar(50)
+  Edad          Int?
+}
+
+model cruano_CitasLocales {
+  CitaID     Int       @id(map: "PK__cruano_C__F0E2D9F2170081A4")
+  PacienteID Int?
+  MedicoID   Int?
+  FechaCita  DateTime? @db.Date
+}
+
+model cruano_Especialidades {
+  EspecialidadID     Int     @id(map: "PK__cruano_E__F9071811072FED06")
+  NombreEspecialidad String? @db.VarChar(100)
+  CostoBase          Float?  @db.Money
+}
+
+model cruano_MedicosRemotos {
+  MedicoID       Int     @id(map: "PK__cruano_M__5953C27667BB31B6")
+  NombreMedico   String? @db.VarChar(100)
+  EspecialidadID Int?
+  CiudadSede     String? @db.VarChar(50)
+}
+
+model cruano_PacientesLocal {
+  PacienteID     Int     @id(map: "PK__cruano_P__9353C07F0D39B2A5")
+  NombrePaciente String? @db.VarChar(100)
+  CiudadPaciente String? @db.VarChar(50)
+  Edad           Int?
+}
+
+model Encuestas {
+  EncuestaID     Int             @id(map: "PK__Encuesta__82FD78C8659E30F8") @default(autoincrement())
+  Nombre         String          @db.VarChar(255)
+  Descripcion    String?         @db.VarChar(Max)
+  TipoEncuestaID Int?
+  TiposEncuestas TiposEncuestas? @relation(fields: [TipoEncuestaID], references: [TipoEncuestaID], onDelete: NoAction, onUpdate: NoAction, map: "FK__Encuestas__TipoE__35BCFE0A")
+  Preguntas      Preguntas[]
+}
+
+model EnviosLocales {
+  EnvioID         Int       @id(map: "PK__EnviosLo__D024E21FD740F2E8")
+  ClienteID       Int?
+  TransportistaID Int?
+  FechaEnvio      DateTime? @db.Date
+}
+
+model Especialidades {
+  EspecialidadID     Int     @id(map: "PK__Especial__F907181195788BB5")
+  NombreEspecialidad String? @db.VarChar(100)
+  CostoBase          Float?  @db.Money
+}
+
+model Especialidades_aherreraB {
+  EspecialidadID     Int     @id(map: "PK__Especial__F9071811F78FD6DE")
+  NombreEspecialidad String? @db.VarChar(100)
+  CostoBase          Float?  @db.Money
+}
+
+model Especialidades_baquinob {
+  EspecialidadID     Int     @id(map: "PK__Especial__F9071811926A5032")
+  NombreEspecialidad String? @db.VarChar(100)
+  CostoBase          Float?  @db.Money
+}
+
+model Especialidades_bquiroaB {
+  EspecialidadID     Int     @id(map: "PK__Especial__F9071811A978CAAE")
+  NombreEspecialidad String? @db.VarChar(100)
+  CostoBase          Float?  @db.Money
+}
+
+model Especialidades_bquiroaoB {
+  EspecialidadID     Int     @id(map: "PK__Especial__F90718117B43213B")
+  NombreEspecialidad String? @db.VarChar(100)
+  CostoBase          Float?  @db.Money
+}
+
+model Especialidades_gorellanav1B {
+  EspecialidadID     Int     @id(map: "PK__Especial__F9071811BB728EC8")
+  NombreEspecialidad String? @db.VarChar(100)
+  CostoBase          Float?  @db.Money
+}
+
+model Especialidades_jciriloB {
+  EspecialidadID     Int     @id(map: "PK__Especial__F9071811278E8493")
+  NombreEspecialidad String? @db.VarChar(100)
+  CostoBase          Float?  @db.Money
+}
+
+model Especialidades_jhichoB {
+  EspecialidadID     Int     @id(map: "PK__Especial__F907181113FA6928")
+  NombreEspecialidad String? @db.VarChar(100)
+  CostoBase          Float?  @db.Money
+}
+
+model Especialidades_Laroche2B {
+  EspecialidadID     Int     @id(map: "PK__Especial__F90718116850D25F")
+  NombreEspecialidad String? @db.VarChar(100)
+  CostoBase          Float?  @db.Money
+}
+
+model Especialidades_mfajardo {
+  EspecialidadID     Int     @id(map: "PK__Especial__F9071811AD5C5503")
+  NombreEspecialidad String? @db.VarChar(100)
+  CostoBase          Float?  @db.Money
+}
+
+model Especialidades7587 {
+  EspecialidadID     Int     @id(map: "PK__Especial__F90718113DDC91DC")
+  NombreEspecialidad String? @db.VarChar(100)
+  CostoBase          Float?  @db.Money
+}
+
+model EspecialidadesARB {
+  EspecialidadID     Int     @id(map: "PK__Especial__F9071811910548CB")
+  NombreEspecialidad String? @db.VarChar(100)
+  CostoBase          Float?  @db.Money
+}
+
+model Especialidadesebolc {
+  EspecialidadID     Int     @id(map: "PK__Especial__F907181163EE294B")
+  NombreEspecialidad String? @db.VarChar(100)
+  CostoBase          Float?  @db.Money
+}
+
+model EspecialidadesERamazzini {
+  EspecialidadID     Int     @id(map: "PK__Especial__F9071811F3995B79")
+  NombreEspecialidad String? @db.VarChar(100)
+  CostoBase          Float?  @db.Money
+}
+
+model EstudianteMisiones {
+  DetalleID     Int         @id(map: "PK__Estudian__6E19D6FAC6268134") @default(autoincrement())
+  Carnet        String      @db.VarChar(25)
+  MisionID      Int
+  Estado        Boolean
+  FechaRegistro DateTime?   @default(now(), map: "DF__Estudiant__Fecha__7B264821") @db.DateTime
+  Estudiantes   Estudiantes @relation(fields: [Carnet], references: [Carnet], onUpdate: NoAction, map: "FK_Estudiante")
+  Misiones      Misiones    @relation(fields: [MisionID], references: [MisionID], onUpdate: NoAction, map: "FK_Mision")
+
+  @@unique([Carnet, MisionID], map: "UQ_EstudianteMision")
+}
+
+model Estudiantes {
+  Carnet             String               @id(map: "PK__Estudian__5E387B4C65B1CA55") @db.VarChar(25)
+  Nombre             String               @db.NVarChar(150)
+  Correo             String               @unique(map: "UQ__Estudian__60695A191CB8C2D0") @db.NVarChar(150)
+  EstudianteMisiones EstudianteMisiones[]
+}
+
+model fflorese_TiposCarga {
+  TipoCargaID Int     @id(map: "PK__fflorese__1D2E4F0D471285F9")
+  NombreCarga String? @db.VarChar(100)
+  TarifaBase  Float?  @db.Money
+}
+
+model fflorese_TransportistasRemotos {
+  TransportistaID Int     @id(map: "PK__fflorese__A26C7F55453F4F1A")
+  NombreChofer    String? @db.VarChar(100)
+  TipoCargaID     Int?
+  CiudadSede      String? @db.VarChar(50)
+}
+
+model jmoralesB_Especialidades {
+  EspecialidadID     Int     @id(map: "PK__jmorales__F9071811CA2ED884")
+  NombreEspecialidad String? @db.VarChar(100)
+  CostoBase          Float?  @db.Money
+}
+
+model jmoralesB_MedicosRemotos {
+  MedicoID       Int     @id(map: "PK__jmorales__5953C27656AE9819")
+  NombreMedico   String? @db.VarChar(100)
+  EspecialidadID Int?
+  CiudadSede     String? @db.VarChar(50)
+}
+
+model MedicosRemotos {
+  MedicoID       Int     @id(map: "PK__MedicosR__5953C276F63FA0BB")
+  NombreMedico   String? @db.VarChar(100)
+  EspecialidadID Int?
+  CiudadSede     String? @db.VarChar(50)
+}
+
+model MedicosRemotos_aherreraB {
+  MedicoID       Int     @id(map: "PK__MedicosR__5953C276D0DED683")
+  NombreMedico   String? @db.VarChar(100)
+  EspecialidadID Int?
+  CiudadSede     String? @db.VarChar(50)
+}
+
+model MedicosRemotos_baquinob {
+  MedicoID       Int     @id(map: "PK__MedicosR__5953C276D3294FA1")
+  NombreMedico   String? @db.VarChar(100)
+  EspecialidadID Int?
+  CiudadSede     String? @db.VarChar(50)
+}
+
+model MedicosRemotos_bquiroaoB {
+  MedicoID       Int     @id(map: "PK__MedicosR__5953C2762CD15D4E")
+  NombreMedico   String? @db.VarChar(100)
+  EspecialidadID Int?
+  CiudadSede     String? @db.VarChar(50)
+}
+
+model MedicosRemotos_gorellanav1B {
+  MedicoID       Int     @id(map: "PK__MedicosR__5953C27662BD5734")
+  NombreMedico   String? @db.VarChar(100)
+  EspecialidadID Int?
+  CiudadSede     String? @db.VarChar(50)
+}
+
+model MedicosRemotos_jciriloB {
+  MedicoID       Int     @id(map: "PK__MedicosR__5953C276E1ABDB5A")
+  NombreMedico   String? @db.VarChar(100)
+  EspecialidadID Int?
+  CiudadSede     String? @db.VarChar(50)
+}
+
+model MedicosRemotos_jhichoB {
+  MedicoID       Int     @id(map: "PK__MedicosR__5953C276F333B65E")
+  NombreMedico   String? @db.VarChar(100)
+  EspecialidadID Int?
+  CiudadSede     String? @db.VarChar(50)
+}
+
+model MedicosRemotos_Laroche2B {
+  MedicoID       Int     @id(map: "PK__MedicosR__5953C276BABF89C8")
+  NombreMedico   String? @db.VarChar(100)
+  EspecialidadID Int?
+  CiudadSede     String? @db.VarChar(50)
+}
+
+model MedicosRemotos_mfajardo {
+  MedicoID       Int     @id(map: "PK__MedicosR__5953C276A652F492")
+  NombreMedico   String? @db.VarChar(100)
+  EspecialidadID Int?
+  CiudadSede     String? @db.VarChar(50)
+}
+
+model MedicosRemotos7587 {
+  MedicoID       Int     @id(map: "PK__MedicosR__5953C276E5E7BE12")
+  NombreMedico   String? @db.VarChar(100)
+  EspecialidadID Int?
+  CiudadSede     String? @db.VarChar(50)
+}
+
+model MedicosRemotosARB {
+  MedicoID       Int     @id(map: "PK__MedicosR__5953C276A56441A7")
+  NombreMedico   String? @db.VarChar(100)
+  EspecialidadID Int?
+  CiudadSede     String? @db.VarChar(50)
+}
+
+model MedicosRemotosebolc {
+  MedicoID       Int     @id(map: "PK__MedicosR__5953C276756AEF40")
+  NombreMedico   String? @db.VarChar(100)
+  EspecialidadID Int?
+  CiudadSede     String? @db.VarChar(50)
+}
+
+model MedicosRemotosERamazzini {
+  MedicoID       Int     @id(map: "PK__MedicosR__5953C2765E7B3B72")
+  NombreMedico   String? @db.VarChar(100)
+  EspecialidadID Int?
+  CiudadSede     String? @db.VarChar(50)
+}
+
+model mgironm_CitasLocales {
+  CitaID     Int       @id(map: "PK__mgironm___F0E2D9F260A03C8D")
+  PacienteID Int?
+  MedicoID   Int?
+  FechaCita  DateTime? @db.Date
+}
+
+model mgironm_Especialidades {
+  EspecialidadID     Int     @id(map: "PK__mgironm___F907181107AAB32A")
+  NombreEspecialidad String? @db.VarChar(100)
+  CostoBase          Float?  @db.Money
+}
+
+model mgironm_MedicosRemotos {
+  MedicoID       Int     @id(map: "PK__mgironm___5953C276788B66FF")
+  NombreMedico   String? @db.VarChar(100)
+  EspecialidadID Int?
+  CiudadSede     String? @db.VarChar(50)
+}
+
+model mgironm_PacientesLocal {
+  PacienteID     Int     @id(map: "PK__mgironm___9353C07F50856884")
+  NombrePaciente String? @db.VarChar(100)
+  CiudadPaciente String? @db.VarChar(50)
+  Edad           Int?
+}
+
+model mgironm_TiposCarga {
+  TipoCargaID Int     @id(map: "PK__mgironm___1D2E4F0D71E92150")
+  NombreCarga String? @db.VarChar(100)
+  TarifaBase  Float?  @db.Money
+}
+
+model mgironm_TransportistasRemotos {
+  TransportistaID Int     @id(map: "PK__mgironm___A26C7F5501A0D838")
+  NombreChofer    String? @db.VarChar(100)
+  TipoCargaID     Int?
+  CiudadSede      String? @db.VarChar(50)
+}
+
+model Misiones {
+  MisionID           Int                  @id(map: "PK__Misiones__83EC86FD7C064331") @default(autoincrement())
+  Nombre             String               @db.NVarChar(100)
+  Descripcion        String?              @db.NVarChar(250)
+  EstudianteMisiones EstudianteMisiones[]
+}
+
+model OpcionesRespuestas {
+  OpcionID          Int                 @id(map: "PK__Opciones__77CD08032E34B10B") @default(autoincrement())
+  PreguntaID        Int?
+  TextoOpcion       String              @db.VarChar(255)
+  Preguntas         Preguntas?          @relation(fields: [PreguntaID], references: [PreguntaID], onDelete: NoAction, onUpdate: NoAction, map: "FK__OpcionesR__Pregu__2D27B809")
+  RespuestasUsuario RespuestasUsuario[]
+}
+
+model PacientesLocal {
+  PacienteID     Int     @id(map: "PK__Paciente__9353C07FC4E74EFC")
+  NombrePaciente String? @db.VarChar(100)
+  CiudadPaciente String? @db.VarChar(50)
+  Edad           Int?
+}
+
+model PacientesLocal7587 {
+  PacienteID     Int     @id(map: "PK__Paciente__9353C07F50B3897E")
+  NombrePaciente String? @db.VarChar(100)
+  CiudadPaciente String? @db.VarChar(50)
+  Edad           Int?
+}
+
+model Preguntas {
+  PreguntaID         Int                  @id(map: "PK__Pregunta__EBB2A359C270E905") @default(autoincrement())
+  EncuestaID         Int?
+  TextoPregunta      String               @db.VarChar(Max)
+  OpcionesRespuestas OpcionesRespuestas[]
+  Encuestas          Encuestas?           @relation(fields: [EncuestaID], references: [EncuestaID], onDelete: NoAction, onUpdate: NoAction, map: "FK__Preguntas__Encue__2A4B4B5E")
+}
+
+model PruebaIsolationLevels {
+  EmpID     Int     @id(map: "pk_EmpID")
+  EmpName   String? @db.VarChar(100)
+  EmpSalary Float?  @db.Money
+}
+
+model RespuestasUsuario {
+  RespuestaID        Int                 @id(map: "PK__Respuest__31F7FC3100CFF2FD") @default(autoincrement())
+  UsuarioID          String?             @db.VarChar(50)
+  OpcionID           Int?
+  Seleccionado       Boolean
+  FechaRespuesta     DateTime?           @default(now(), map: "DF__Respuesta__Fecha__32E0915F") @db.DateTime
+  OpcionesRespuestas OpcionesRespuestas? @relation(fields: [OpcionID], references: [OpcionID], onDelete: NoAction, onUpdate: NoAction, map: "FK__Respuesta__Opcio__34C8D9D1")
+  Usuarios           Usuarios?           @relation(fields: [UsuarioID], references: [UsuarioID], onDelete: NoAction, onUpdate: NoAction, map: "FK_RespuestasUsuario_Usuarios")
+}
+
+model sysdiagrams {
+  name         String @db.NVarChar(128)
+  principal_id Int
+  diagram_id   Int    @id(map: "PK__sysdiagr__C2B05B61FF5B8694") @default(autoincrement())
+  version      Int?
+  definition   Bytes?
+
+  @@unique([principal_id, name], map: "UK_principal_name")
+}
+
+model Tbl_Cartelera {
+  imdbID       String    @id(map: "PK_Tbl_Cartelera") @db.VarChar(25)
+  Title        String?   @db.VarChar(50)
+  Year         String?   @db.Char(4)
+  Type         String?   @db.VarChar(50)
+  Poster       String?   @db.VarChar(500)
+  description  String?   @db.VarChar(1000)
+  Ubication    String?   @db.VarChar(50)
+  Estado       Boolean?
+  Fec_Registro DateTime? @default(now(), map: "DF_Fec_Registro") @db.DateTime
+}
+
+model TiposEncuestas {
+  TipoEncuestaID Int         @id(map: "PK__TiposEnc__2CBA88E2C26DC5B1") @default(autoincrement())
+  NombreTipo     String      @db.VarChar(100)
+  Encuestas      Encuestas[]
+}
+
+model Usuarios {
+  UsuarioID         String              @id(map: "PK__Usuarios__2B3DE7985C8209BE") @db.VarChar(50)
+  Email             String?             @unique(map: "UQ__Usuarios__A9D105345F9A6FD8") @db.VarChar(255)
+  RespuestasUsuario RespuestasUsuario[]
+}
