@@ -140,6 +140,12 @@ h1 {
   font-size: 0.85rem;
 }
 
+.mission-list p {
+  color: #64748b;
+  font-size: 0.9rem;
+  margin: 0.25rem 0 0;
+}
+
 .completed strong {
   color: #187257;
 }

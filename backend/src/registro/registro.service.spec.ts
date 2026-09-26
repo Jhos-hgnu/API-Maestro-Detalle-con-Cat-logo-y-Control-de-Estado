@@ -1,4 +1,7 @@
-import { ConflictException, UnprocessableEntityException } from '@nestjs/common';
+import {
+  ConflictException,
+  UnprocessableEntityException,
+} from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { RegistroDto } from './dto/registro.dto';
 import { RegistroService } from './registro.service';
@@ -16,12 +19,16 @@ describe('RegistroService', () => {
   function crearPrisma(misiones: number[], estudianteExiste = false) {
     const tx = {
       misiones: {
-        findMany: jest.fn().mockResolvedValue(misiones.map((MisionID) => ({ MisionID }))),
+        findMany: jest
+          .fn()
+          .mockResolvedValue(misiones.map((MisionID) => ({ MisionID }))),
       },
       estudiantes: {
         findUnique: jest
           .fn()
-          .mockResolvedValue(estudianteExiste ? { Carnet: registro.maestro.carnet } : null),
+          .mockResolvedValue(
+            estudianteExiste ? { Carnet: registro.maestro.carnet } : null,
+          ),
         create: jest.fn(),
         update: jest.fn(),
       },
@@ -53,9 +60,45 @@ describe('RegistroService', () => {
       },
     });
     expect(tx.estudianteMisiones.upsert).toHaveBeenCalledWith({
-      where: { Carnet_MisionID: { Carnet: registro.maestro.carnet, MisionID: 1 } },
+      where: {
+        Carnet_MisionID: { Carnet: registro.maestro.carnet, MisionID: 1 },
+      },
       create: { Carnet: registro.maestro.carnet, MisionID: 1, Estado: true },
       update: { Estado: true },
+    });
+  });
+
+  it('updates an existing student and changes an existing mission state', async () => {
+    const { prisma, tx } = crearPrisma([1], true);
+    const service = new RegistroService(prisma);
+    const actualizacion: RegistroDto = {
+      ...registro,
+      maestro: {
+        ...registro.maestro,
+        nombre: 'Estudiante Actualizado',
+        correo: 'actualizado.fase2@example.test',
+      },
+      detalle: [{ misionId: 1, estado: false }],
+    };
+
+    await expect(service.registrar(actualizacion)).resolves.toMatchObject({
+      estudianteCreado: false,
+      carnet: registro.maestro.carnet,
+      misionesProcesadas: 1,
+    });
+    expect(tx.estudiantes.update).toHaveBeenCalledWith({
+      where: { Carnet: registro.maestro.carnet },
+      data: {
+        Nombre: actualizacion.maestro.nombre,
+        Correo: actualizacion.maestro.correo,
+      },
+    });
+    expect(tx.estudianteMisiones.upsert).toHaveBeenCalledWith({
+      where: {
+        Carnet_MisionID: { Carnet: registro.maestro.carnet, MisionID: 1 },
+      },
+      create: { Carnet: registro.maestro.carnet, MisionID: 1, Estado: false },
+      update: { Estado: false },
     });
   });
 
@@ -70,9 +113,9 @@ describe('RegistroService', () => {
       ],
     };
 
-    await expect(service.registrar(registroConMisionInvalida)).rejects.toBeInstanceOf(
-      UnprocessableEntityException,
-    );
+    await expect(
+      service.registrar(registroConMisionInvalida),
+    ).rejects.toBeInstanceOf(UnprocessableEntityException);
     expect(tx.estudiantes.create).not.toHaveBeenCalled();
     expect(tx.estudiantes.update).not.toHaveBeenCalled();
     expect(tx.estudianteMisiones.upsert).not.toHaveBeenCalled();
@@ -89,8 +132,8 @@ describe('RegistroService', () => {
       ],
     };
 
-    await expect(service.registrar(registroConDuplicado)).rejects.toBeInstanceOf(
-      ConflictException,
-    );
+    await expect(
+      service.registrar(registroConDuplicado),
+    ).rejects.toBeInstanceOf(ConflictException);
   });
 });

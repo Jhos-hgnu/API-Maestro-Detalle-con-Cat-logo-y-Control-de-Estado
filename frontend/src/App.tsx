@@ -88,7 +88,10 @@ function App() {
                 <ul className="mission-list">
                   {estudiante.misiones.map((mision) => (
                     <li key={mision.misionId} className={mision.estado ? 'completed' : 'pending'}>
-                      <span>Mision {mision.misionId}: {mision.nombre}</span>
+                      <div>
+                        <span>Mision {mision.misionId}: {mision.nombre}</span>
+                        {mision.descripcion && <p>{mision.descripcion}</p>}
+                      </div>
                       <strong>{mision.estado ? 'Completada' : 'Pendiente'}</strong>
                     </li>
                   ))}
